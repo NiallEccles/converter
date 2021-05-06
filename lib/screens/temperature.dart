@@ -43,8 +43,40 @@ class _TemperatureState extends State<TemperaturePage> {
       });
       return;
     }
+
+    var conversion =
+        createConversion(false, dropdownOneUnit, dropdownTwoUnit, unit);
+
+    setState(() {
+      unitTwoValue = conversion;
+      unitOneValue = double.parse(unit);
+      unitTwoController.text = unitTwoValue.toString();
+    });
+  }
+
+  updateUnitTwo(String unit) {
+    if (unit == null || unit == '') {
+      setState(() {
+        unitOneValue = 0;
+        unitTwoValue = 0;
+        unitOneController.text = 0.toString();
+      });
+      return;
+    }
+
+    var conversion =
+        createConversion(true, dropdownOneUnit, dropdownTwoUnit, unit);
+
+    setState(() {
+      unitOneValue = conversion;
+      unitTwoValue = double.parse(unit);
+      unitOneController.text = unitOneValue.toString();
+    });
+  }
+
+  createConversion(reverse, firstUnit, secondUnit, unit) {
     var conversion = 0.0;
-    switch (dropdownOneUnit) {
+    switch (reverse ? secondUnit : firstUnit) {
       case 'Celsius':
         conversion = double.parse(unit).toKelvin(TemperatureUnit.celsius);
         break;
@@ -61,7 +93,7 @@ class _TemperatureState extends State<TemperaturePage> {
         conversion = double.parse(unit).toKelvin(TemperatureUnit.kelvin);
         break;
     }
-    switch (dropdownTwoUnit) {
+    switch (reverse ? firstUnit : secondUnit) {
       case 'Celsius':
         conversion = conversion.toCelsius;
         break;
@@ -78,48 +110,49 @@ class _TemperatureState extends State<TemperaturePage> {
         conversion = conversion.toKelvin(TemperatureUnit.kelvin);
         break;
     }
-
-    unitTwoValue = conversion;
-    setState(() {
-      unitTwoValue = conversion;
-      unitOneValue = double.parse(unit);
-      unitTwoController.text = unitTwoValue.toString();
-    });
+    return conversion;
   }
 
   @override
   Widget build(BuildContext context) {
     // dropdownOneUnit = units[0].toString();
     // dropdownTwoUnit = units[1].toString();
+    updateUnitOne('0');
 
     return new Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          Text('Temperature'),
-          Icon(Icons.thermostat_rounded),
-        ]),
+        title: Row(
+          children: [
+            Text('Temperature'),
+            Icon(Icons.thermostat_rounded),
+          ],
+        ),
       ),
       drawer: CDrawer(),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  unitOneValue.toString() + ' ' + dropdownOneUnit,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '=',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  unitTwoValue.toString() + ' ' + dropdownTwoUnit,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    unitOneValue.toString() + ' ' + dropdownOneUnit,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '=',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    unitTwoValue.toString() + ' ' + dropdownTwoUnit,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             TextField(
               keyboardType: TextInputType.number,
@@ -132,7 +165,9 @@ class _TemperatureState extends State<TemperaturePage> {
                 labelText: dropdownOneUnit,
               ),
             ),
-            Row(
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   DropdownButton<String>(
@@ -171,12 +206,15 @@ class _TemperatureState extends State<TemperaturePage> {
                     iconSize: 24,
                     elevation: 16,
                     style: const TextStyle(color: Colors.blue),
-
+                    underline: Container(
+                      height: 2,
+                      color: Colors.blue,
+                    ),
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownTwoUnit = newValue;
                       });
-                      updateUnitOne(unitOneValue.toString());
+                      updateUnitTwo(unitTwoValue.toString());
                     },
                     items: units.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -185,11 +223,15 @@ class _TemperatureState extends State<TemperaturePage> {
                       );
                     }).toList(),
                   ),
-                ]),
+                ],
+              ),
+            ),
             TextField(
               keyboardType: TextInputType.number,
               controller: unitTwoController,
-              readOnly: true,
+              onChanged: (text) {
+                updateUnitTwo(text);
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: dropdownTwoUnit,
