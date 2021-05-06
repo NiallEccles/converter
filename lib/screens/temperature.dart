@@ -28,7 +28,7 @@ class _TemperatureState extends State<TemperaturePage> {
     'romer': TemperatureUnit.romer
   };
   double unitOneValue = 0;
-  double unitTwoValue = 0;
+  double unitTwoValue = 32.0;
   String dropdownOneUnit = 'Celsius';
   String dropdownTwoUnit = 'Fahrenheit';
   var unitOneController = TextEditingController();
@@ -117,7 +117,6 @@ class _TemperatureState extends State<TemperaturePage> {
   Widget build(BuildContext context) {
     // dropdownOneUnit = units[0].toString();
     // dropdownTwoUnit = units[1].toString();
-    updateUnitOne('0');
 
     return new Scaffold(
       appBar: AppBar(
@@ -139,17 +138,42 @@ class _TemperatureState extends State<TemperaturePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    unitOneValue.toString() + ' ' + dropdownOneUnit,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        unitOneValue.toString(),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        dropdownOneUnit,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.normal),
+                      ),
+                    ],
                   ),
                   Text(
                     '=',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
                   ),
-                  Text(
-                    unitTwoValue.toString() + ' ' + dropdownTwoUnit,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        unitTwoValue.toString(),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        dropdownTwoUnit,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.normal),
+                      ),
+                    ],
                   ),
                 ],
               ),
