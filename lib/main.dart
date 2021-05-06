@@ -1,7 +1,7 @@
 import 'package:converter/screens/home.dart';
 import 'package:converter/screens/temperature.dart';
+import 'package:converter/screens/length.dart';
 import 'package:flutter/material.dart';
-import './custom_routes.dart';
 
 void main() async {
   runApp(MyApp());
@@ -43,6 +43,10 @@ class MyApp extends StatelessWidget {
           );
           case '/temperature': return new MyCustomRoute(
             builder: (_) => new TemperaturePage(),
+            settings: settings,
+          );
+          case '/length': return new MyCustomRoute(
+            builder: (_) => new LengthPage(),
             settings: settings,
           );
         }

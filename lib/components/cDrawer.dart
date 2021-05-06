@@ -38,7 +38,7 @@ class CDrawer extends StatelessWidget {
             title: Text('Length'),
             trailing: Icon(Icons.straighten),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/length");
             },
           ),
           ListTile(
