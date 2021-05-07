@@ -1,6 +1,7 @@
 import 'package:converter/screens/home.dart';
 import 'package:converter/screens/temperature.dart';
 import 'package:converter/screens/length.dart';
+import 'package:converter/screens/area.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -47,6 +48,10 @@ class MyApp extends StatelessWidget {
           );
           case '/length': return new MyCustomRoute(
             builder: (_) => new LengthPage(),
+            settings: settings,
+          );
+          case '/area': return new MyCustomRoute(
+            builder: (_) => new AreaPage(),
             settings: settings,
           );
         }

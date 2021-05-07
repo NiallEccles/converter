@@ -31,7 +31,7 @@ class CDrawer extends StatelessWidget {
             title: Text('Area'),
             trailing: Icon(Icons.crop_square),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/area");
             },
           ),
           ListTile(
