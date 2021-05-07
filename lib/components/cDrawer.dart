@@ -48,27 +48,27 @@ class CDrawer extends StatelessWidget {
               Navigator.pushNamed(context, "/speed");
             },
           ),
-          ListTile(
-            title: Text('Volume'),
-            trailing: Icon(Icons.local_drink),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text('Mass'),
-            trailing: Icon(Icons.fitness_center),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text('Pressure'),
-            trailing: Icon(Icons.compress),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          // ListTile(
+          //   title: Text('Volume'),
+          //   trailing: Icon(Icons.local_drink),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // ListTile(
+          //   title: Text('Mass'),
+          //   trailing: Icon(Icons.fitness_center),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // ListTile(
+          //   title: Text('Pressure'),
+          //   trailing: Icon(Icons.compress),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
           ListTile(
             title: Text('Temperature'),
             trailing: Icon(Icons.thermostat_rounded),
@@ -77,20 +77,20 @@ class CDrawer extends StatelessWidget {
               Navigator.pushNamed(context, "/temperature");
             },
           ),
-          ListTile(
-            title: Text('Time'),
-            trailing: Icon(Icons.schedule),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text('Fuel Economy'),
-            trailing: Icon(Icons.local_gas_station),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          // ListTile(
+          //   title: Text('Time'),
+          //   trailing: Icon(Icons.schedule),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // ListTile(
+          //   title: Text('Fuel Economy'),
+          //   trailing: Icon(Icons.local_gas_station),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
         ],
       ),
     );
