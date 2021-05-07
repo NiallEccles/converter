@@ -1,4 +1,5 @@
 import 'package:converter/screens/home.dart';
+import 'package:converter/screens/speed.dart';
 import 'package:converter/screens/temperature.dart';
 import 'package:converter/screens/length.dart';
 import 'package:converter/screens/area.dart';
@@ -52,6 +53,10 @@ class MyApp extends StatelessWidget {
           );
           case '/area': return new MyCustomRoute(
             builder: (_) => new AreaPage(),
+            settings: settings,
+          );
+          case '/speed': return new MyCustomRoute(
+            builder: (_) => new SpeedPage(),
             settings: settings,
           );
         }

@@ -45,7 +45,7 @@ class CDrawer extends StatelessWidget {
             title: Text('Speed'),
             trailing: Icon(Icons.speed),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/speed");
             },
           ),
           ListTile(
